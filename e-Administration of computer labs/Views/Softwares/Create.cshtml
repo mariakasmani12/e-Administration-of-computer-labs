@@ -1,0 +1,42 @@
+﻿@model e_Administration_of_computer_labs.Models.Software
+
+@{
+    Layout = "~/Views/Shared/_DashboradLayout.cshtml";
+}
+
+<h2>Create Software</h2>
+
+<form asp-action="Create">
+    <div class="form-group">
+        <label asp-for="Name" class="control-label"></label>
+        <input asp-for="Name" class="form-control" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Version" class="control-label"></label>
+        <input asp-for="Version" class="form-control" />
+        <span asp-validation-for="Version" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="InstallationDate" class="control-label"></label>
+        <input asp-for="InstallationDate" class="form-control" type="date" />
+        <span asp-validation-for="InstallationDate" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="ExpiryDate" class="control-label"></label>
+        <input asp-for="ExpiryDate" class="form-control" type="date" />
+        <span asp-validation-for="ExpiryDate" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="DocumentationLink" class="control-label"></label>
+        <input asp-for="DocumentationLink" class="form-control" />
+        <span asp-validation-for="DocumentationLink" class="text-danger"></span>
+    </div>
+    <div class="form-group mt-3">
+        <input type="submit" value="Create" class="btn btn-primary" />
+    </div>
+</form>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>

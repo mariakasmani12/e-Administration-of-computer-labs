@@ -7,15 +7,14 @@
         public DateTime DateSubmitted { get; set; }
         public string Status { get; set; } // Pending, In Progress, Resolved
 
-        public int UserId { get; set; }
-        public User User { get; set; }
+        public string UserId { get; set; }
+        public ApplicationUser? User { get; set; }
 
         public int LabId { get; set; }
-        public Lab Lab { get; set; }
+        public Lab? Lab { get; set; } = null!;
 
 
-        public int? EquipmentId { get; set; }
-        public Equipment Equipment { get; set; }
-        public ICollection<Report> Reports { get; set; }
+        public int EquipmentId { get; set; }
+        public Equipment? Equipment { get; set; }
     }
 }

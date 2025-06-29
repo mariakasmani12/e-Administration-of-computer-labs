@@ -22,6 +22,218 @@ namespace e_Administration_of_computer_labs.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<string>("NormalizedName")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("NormalizedName")
+                        .IsUnique()
+                        .HasDatabaseName("RoleNameIndex")
+                        .HasFilter("[NormalizedName] IS NOT NULL");
+
+                    b.ToTable("AspNetRoles", (string)null);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("ClaimType")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ClaimValue")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("RoleId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("RoleId");
+
+                    b.ToTable("AspNetRoleClaims", (string)null);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("ClaimType")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ClaimValue")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("AspNetUserClaims", (string)null);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
+                {
+                    b.Property<string>("LoginProvider")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("ProviderKey")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("ProviderDisplayName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("LoginProvider", "ProviderKey");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("AspNetUserLogins", (string)null);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
+                {
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("RoleId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("UserId", "RoleId");
+
+                    b.HasIndex("RoleId");
+
+                    b.ToTable("AspNetUserRoles", (string)null);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
+                {
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("LoginProvider")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Value")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("UserId", "LoginProvider", "Name");
+
+                    b.ToTable("AspNetUserTokens", (string)null);
+                });
+
+            modelBuilder.Entity("e_Administration_of_computer_labs.Models.ApplicationUser", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("AccessFailedCount")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("DepartmentId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Email")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<bool>("EmailConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("FullName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("LockoutEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTimeOffset?>("LockoutEnd")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<string>("NormalizedEmail")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<string>("NormalizedUserName")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<string>("PasswordHash")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("PhoneNumberConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<int?>("RoleId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("SecurityStamp")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("TwoFactorEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("UserName")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DepartmentId");
+
+                    b.HasIndex("NormalizedEmail")
+                        .HasDatabaseName("EmailIndex");
+
+                    b.HasIndex("NormalizedUserName")
+                        .IsUnique()
+                        .HasDatabaseName("UserNameIndex")
+                        .HasFilter("[NormalizedUserName] IS NOT NULL");
+
+                    b.HasIndex("RoleId");
+
+                    b.ToTable("AspNetUsers", (string)null);
+                });
+
             modelBuilder.Entity("e_Administration_of_computer_labs.Models.Complaint", b =>
                 {
                     b.Property<int>("Id")
@@ -37,7 +249,7 @@ namespace e_Administration_of_computer_labs.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("EquipmentId")
+                    b.Property<int>("EquipmentId")
                         .HasColumnType("int");
 
                     b.Property<int>("LabId")
@@ -47,8 +259,9 @@ namespace e_Administration_of_computer_labs.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
 
@@ -121,8 +334,9 @@ namespace e_Administration_of_computer_labs.Migrations
                     b.Property<TimeSpan>("EndTime")
                         .HasColumnType("time");
 
-                    b.Property<int>("HODId")
-                        .HasColumnType("int");
+                    b.Property<string>("HODId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("LabId")
                         .HasColumnType("int");
@@ -181,17 +395,19 @@ namespace e_Administration_of_computer_labs.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<TimeSpan>("EndTime")
-                        .HasColumnType("time");
+                    b.Property<string>("EndTime")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("InstructorId")
-                        .HasColumnType("int");
+                    b.Property<string>("InstructorId")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("LabId")
                         .HasColumnType("int");
 
-                    b.Property<TimeSpan>("StartTime")
-                        .HasColumnType("time");
+                    b.Property<string>("StartTime")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -210,7 +426,7 @@ namespace e_Administration_of_computer_labs.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int?>("ComplaintId")
+                    b.Property<int>("ComplaintId")
                         .HasColumnType("int");
 
                     b.Property<string>("Remarks")
@@ -220,11 +436,12 @@ namespace e_Administration_of_computer_labs.Migrations
                     b.Property<DateTime>("ReportDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("SoftwareId")
+                    b.Property<int>("SoftwareId")
                         .HasColumnType("int");
 
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
 
@@ -285,56 +502,88 @@ namespace e_Administration_of_computer_labs.Migrations
                     b.ToTable("Softwares");
                 });
 
-            modelBuilder.Entity("e_Administration_of_computer_labs.Models.User", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
+                        .WithMany()
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
+                {
+                    b.HasOne("e_Administration_of_computer_labs.Models.ApplicationUser", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
 
-                    b.Property<int>("DepartmentId")
-                        .HasColumnType("int");
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
+                {
+                    b.HasOne("e_Administration_of_computer_labs.Models.ApplicationUser", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
 
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
+                {
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
+                        .WithMany()
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.HasOne("e_Administration_of_computer_labs.Models.ApplicationUser", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
 
-                    b.Property<string>("Password")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
+                {
+                    b.HasOne("e_Administration_of_computer_labs.Models.ApplicationUser", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
 
-                    b.Property<int>("RoleId")
-                        .HasColumnType("int");
+            modelBuilder.Entity("e_Administration_of_computer_labs.Models.ApplicationUser", b =>
+                {
+                    b.HasOne("e_Administration_of_computer_labs.Models.Department", "Department")
+                        .WithMany("Users")
+                        .HasForeignKey("DepartmentId");
 
-                    b.HasKey("Id");
+                    b.HasOne("e_Administration_of_computer_labs.Models.Role", "Role")
+                        .WithMany("Users")
+                        .HasForeignKey("RoleId");
 
-                    b.HasIndex("DepartmentId");
+                    b.Navigation("Department");
 
-                    b.HasIndex("RoleId");
-
-                    b.ToTable("Users");
+                    b.Navigation("Role");
                 });
 
             modelBuilder.Entity("e_Administration_of_computer_labs.Models.Complaint", b =>
                 {
                     b.HasOne("e_Administration_of_computer_labs.Models.Equipment", "Equipment")
-                        .WithMany("Complaints")
+                        .WithMany()
                         .HasForeignKey("EquipmentId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
                     b.HasOne("e_Administration_of_computer_labs.Models.Lab", "Lab")
-                        .WithMany("Complaints")
+                        .WithMany()
                         .HasForeignKey("LabId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("e_Administration_of_computer_labs.Models.User", "User")
-                        .WithMany("Complaints")
+                    b.HasOne("e_Administration_of_computer_labs.Models.ApplicationUser", "User")
+                        .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
@@ -349,7 +598,7 @@ namespace e_Administration_of_computer_labs.Migrations
             modelBuilder.Entity("e_Administration_of_computer_labs.Models.Equipment", b =>
                 {
                     b.HasOne("e_Administration_of_computer_labs.Models.Lab", "Lab")
-                        .WithMany("Equipments")
+                        .WithMany()
                         .HasForeignKey("LabId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -360,12 +609,12 @@ namespace e_Administration_of_computer_labs.Migrations
             modelBuilder.Entity("e_Administration_of_computer_labs.Models.ExtraLabRequest", b =>
                 {
                     b.HasOne("e_Administration_of_computer_labs.Models.Department", "Department")
-                        .WithMany("ExtraLabRequests")
+                        .WithMany()
                         .HasForeignKey("DepartmentId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("e_Administration_of_computer_labs.Models.User", "HOD")
+                    b.HasOne("e_Administration_of_computer_labs.Models.ApplicationUser", "User")
                         .WithMany()
                         .HasForeignKey("HODId")
                         .OnDelete(DeleteBehavior.Restrict)
@@ -379,21 +628,19 @@ namespace e_Administration_of_computer_labs.Migrations
 
                     b.Navigation("Department");
 
-                    b.Navigation("HOD");
-
                     b.Navigation("Lab");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("e_Administration_of_computer_labs.Models.LabAssignment", b =>
                 {
-                    b.HasOne("e_Administration_of_computer_labs.Models.User", "Instructor")
-                        .WithMany("LabAssignments")
-                        .HasForeignKey("InstructorId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.HasOne("e_Administration_of_computer_labs.Models.ApplicationUser", "Instructor")
+                        .WithMany()
+                        .HasForeignKey("InstructorId");
 
                     b.HasOne("e_Administration_of_computer_labs.Models.Lab", "Lab")
-                        .WithMany("LabAssignments")
+                        .WithMany()
                         .HasForeignKey("LabId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -406,15 +653,19 @@ namespace e_Administration_of_computer_labs.Migrations
             modelBuilder.Entity("e_Administration_of_computer_labs.Models.Report", b =>
                 {
                     b.HasOne("e_Administration_of_computer_labs.Models.Complaint", "Complaint")
-                        .WithMany("Reports")
-                        .HasForeignKey("ComplaintId");
+                        .WithMany()
+                        .HasForeignKey("ComplaintId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("e_Administration_of_computer_labs.Models.Software", "Software")
-                        .WithMany("Reports")
-                        .HasForeignKey("SoftwareId");
+                        .WithMany()
+                        .HasForeignKey("SoftwareId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.HasOne("e_Administration_of_computer_labs.Models.User", "User")
-                        .WithMany("Reports")
+                    b.HasOne("e_Administration_of_computer_labs.Models.ApplicationUser", "User")
+                        .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -426,68 +677,14 @@ namespace e_Administration_of_computer_labs.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("e_Administration_of_computer_labs.Models.User", b =>
-                {
-                    b.HasOne("e_Administration_of_computer_labs.Models.Department", "Department")
-                        .WithMany("Users")
-                        .HasForeignKey("DepartmentId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("e_Administration_of_computer_labs.Models.Role", "Role")
-                        .WithMany("Users")
-                        .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Department");
-
-                    b.Navigation("Role");
-                });
-
-            modelBuilder.Entity("e_Administration_of_computer_labs.Models.Complaint", b =>
-                {
-                    b.Navigation("Reports");
-                });
-
             modelBuilder.Entity("e_Administration_of_computer_labs.Models.Department", b =>
                 {
-                    b.Navigation("ExtraLabRequests");
-
                     b.Navigation("Users");
-                });
-
-            modelBuilder.Entity("e_Administration_of_computer_labs.Models.Equipment", b =>
-                {
-                    b.Navigation("Complaints");
-                });
-
-            modelBuilder.Entity("e_Administration_of_computer_labs.Models.Lab", b =>
-                {
-                    b.Navigation("Complaints");
-
-                    b.Navigation("Equipments");
-
-                    b.Navigation("LabAssignments");
                 });
 
             modelBuilder.Entity("e_Administration_of_computer_labs.Models.Role", b =>
                 {
                     b.Navigation("Users");
-                });
-
-            modelBuilder.Entity("e_Administration_of_computer_labs.Models.Software", b =>
-                {
-                    b.Navigation("Reports");
-                });
-
-            modelBuilder.Entity("e_Administration_of_computer_labs.Models.User", b =>
-                {
-                    b.Navigation("Complaints");
-
-                    b.Navigation("LabAssignments");
-
-                    b.Navigation("Reports");
                 });
 #pragma warning restore 612, 618
         }

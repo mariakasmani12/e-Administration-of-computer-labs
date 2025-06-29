@@ -2,13 +2,11 @@
 {
     public class Software
     {
-        public int Id { get; set; }
+         public int Id { get; set; }
         public string Name { get; set; }
         public string Version { get; set; }
         public DateTime InstallationDate { get; set; }
         public DateTime ExpiryDate { get; set; }
         public string DocumentationLink { get; set; }
-
-        public ICollection<Report> Reports { get; set; }
     }
 }

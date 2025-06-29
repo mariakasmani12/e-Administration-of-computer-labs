@@ -1,0 +1,58 @@
+﻿@model List<ApplicationUser>
+
+<div class="col-xl-12">
+    <div class="card" id="bootstrap-table1">
+
+        <div class="tab-content" id="myTabContent">
+            <div class="tab-pane fade show active" id="Preview" role="tabpanel" aria-labelledby="home-tab">
+                <div class="card-body p-0">
+                    <div class="table-responsive">
+                        <table class="table table-responsive-md">
+                            <thead>
+                                <tr>
+                                    <th style="width:80px;">#</th>
+                                    <th>Email</th>
+                                    <th>Full Name</th>
+                                    <th>Role</th>
+                                    <th>Department</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (Model != null && Model.Count > 0)
+                                {
+                                    int count = 1;
+                                    foreach (var user in Model)
+                                    {
+                                        <tr>
+                                            <td><strong>@count</strong></td>
+                                            <td>@user.Email</td>
+                                            <td>@user.FullName</td>
+                                            <td>@(user.Role != null ? user.Role.Name : "Not Assigned")</td>
+                                            <td>@(user.Department != null ? user.Department.Name : "Not Assigned")</td>
+                                            <td>
+                                                <a asp-action="AssignRoleDepartment"
+                                                   asp-route-userId="@user.Id"
+                                                   class="btn btn-sm btn-info">
+                                                    Assign Role/Dept
+                                                </a>
+                                            </td>
+                                        </tr>
+                                        count++;
+                                    }
+                                }
+                                else
+                                {
+                                    <tr>
+                                        <td colspan="6" class="text-center text-muted">No users found.</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <!-- /card-body -->
+            </div>
+        </div>
+    </div>
+</div>

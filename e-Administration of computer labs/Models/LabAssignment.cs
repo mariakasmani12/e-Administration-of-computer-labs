@@ -4,13 +4,13 @@
     {
         public int Id { get; set; }
         public int LabId { get; set; }
-        public Lab Lab { get; set; }
+        public Lab? Lab { get; set; }
 
-        public int InstructorId { get; set; }
-        public User Instructor { get; set; }
+        public string? InstructorId { get; set; }
+        public ApplicationUser? Instructor { get; set; }
 
         public string DayOfWeek { get; set; }
-        public TimeSpan StartTime { get; set; }
-        public TimeSpan EndTime { get; set; }
+        public string StartTime { get; set; }
+        public string EndTime { get; set; }
     }
 }

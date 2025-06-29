@@ -1,0 +1,32 @@
+﻿@model e_Administration_of_computer_labs.Models.Complaint
+@{
+    Layout = "~/Views/Shared/_DashboradLayout.cshtml";
+}
+
+<h2>Complaint Details</h2>
+
+<div>
+    <dl class="row">
+        <dt class="col-sm-2">Description</dt>
+        <dd class="col-sm-10">@Model.Description</dd>
+
+        <dt class="col-sm-2">Status</dt>
+        <dd class="col-sm-10">@Model.Status</dd>
+
+        <dt class="col-sm-2">Date</dt>
+        <dd class="col-sm-10">@Model.DateSubmitted.ToShortDateString()</dd>
+
+        <dt class="col-sm-2">User</dt>
+        <dd class="col-sm-10">@Model.User?.Email</dd>
+
+        <dt class="col-sm-2">Lab</dt>
+        <dd class="col-sm-10">@Model.Lab?.Name</dd>
+
+        <dt class="col-sm-2">Equipment</dt>
+        <dd class="col-sm-10">@Model.Equipment?.Name</dd>
+    </dl>
+</div>
+<p>
+    <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-info">Edit</a>
+    <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+</p>

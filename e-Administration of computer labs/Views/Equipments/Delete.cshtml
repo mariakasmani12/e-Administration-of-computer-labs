@@ -1,0 +1,45 @@
+﻿@model e_Administration_of_computer_labs.Models.Equipment
+
+@{
+    Layout = "~/Views/Shared/_DashboradLayout.cshtml";
+}
+
+<h1>Delete</h1>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Equipment</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.SerialNumber)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.SerialNumber)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.WarrantyExpiryDate)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.WarrantyExpiryDate)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Lab)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Lab.Id)
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="Id" />
+        <input type="submit" value="Delete" class="btn btn-danger" /> |
+        <a asp-action="Index">Back to List</a>
+    </form>
+</div>

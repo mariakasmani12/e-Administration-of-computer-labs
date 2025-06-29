@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace e_Administration_of_computer_labs.Migrations
 {
     /// <inheritdoc />
-    public partial class InitAllModels : Migration
+    public partial class Initial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -130,7 +130,7 @@ namespace e_Administration_of_computer_labs.Migrations
                     Status = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     UserId = table.Column<int>(type: "int", nullable: false),
                     LabId = table.Column<int>(type: "int", nullable: false),
-                    EquipmentId = table.Column<int>(type: "int", nullable: true)
+                    EquipmentId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -227,8 +227,8 @@ namespace e_Administration_of_computer_labs.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    ComplaintId = table.Column<int>(type: "int", nullable: true),
-                    SoftwareId = table.Column<int>(type: "int", nullable: true),
+                    ComplaintId = table.Column<int>(type: "int", nullable: false),
+                    SoftwareId = table.Column<int>(type: "int", nullable: false),
                     UserId = table.Column<int>(type: "int", nullable: false),
                     Remarks = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ReportDate = table.Column<DateTime>(type: "datetime2", nullable: false)
@@ -240,12 +240,14 @@ namespace e_Administration_of_computer_labs.Migrations
                         name: "FK_Reports_Complaints_ComplaintId",
                         column: x => x.ComplaintId,
                         principalTable: "Complaints",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Reports_Softwares_SoftwareId",
                         column: x => x.SoftwareId,
                         principalTable: "Softwares",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Reports_Users_UserId",
                         column: x => x.UserId,
