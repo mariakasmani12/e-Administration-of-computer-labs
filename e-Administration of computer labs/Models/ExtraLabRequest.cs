@@ -2,13 +2,12 @@
 {
     public class ExtraLabRequest
     {
-
         public int Id { get; set; }
         public int DepartmentId { get; set; }
         public Department Department { get; set; }
 
-        public int HODId { get; set; }
-        public User HOD { get; set; }
+        public string HODId { get; set; }
+        public ApplicationUser User { get; set; }
 
         public int LabId { get; set; }
         public Lab Lab { get; set; }

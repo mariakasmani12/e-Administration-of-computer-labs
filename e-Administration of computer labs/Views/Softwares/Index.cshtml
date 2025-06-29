@@ -1,0 +1,39 @@
+﻿@model IEnumerable<e_Administration_of_computer_labs.Models.Software>
+
+@{
+    Layout = "~/Views/Shared/_DashboradLayout.cshtml";
+}
+
+<h2>Software List</h2>
+<p>
+    <a asp-action="Create" class="btn btn-primary">Add New Software</a>
+</p>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Version</th>
+            <th>Installation Date</th>
+            <th>Expiry Date</th>
+            <th>Documentation Link</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Name</td>
+                <td>@item.Version</td>
+                <td>@item.InstallationDate.ToShortDateString()</td>
+                <td>@item.ExpiryDate.ToShortDateString()</td>
+                <td><a href="@item.DocumentationLink" target="_blank">View</a></td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-warning">Edit</a>
+                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-sm btn-info">Details</a>
+                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-danger">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

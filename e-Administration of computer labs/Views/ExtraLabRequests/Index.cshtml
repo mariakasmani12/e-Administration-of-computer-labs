@@ -1,0 +1,49 @@
+﻿@model IEnumerable<e_Administration_of_computer_labs.Models.ExtraLabRequest>
+
+@{
+    Layout = "~/Views/Shared/_DashboradLayout.cshtml";
+}
+<h2>Extra Lab Requests</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Department</th>
+            <th>HOD</th>
+            <th>Lab</th>
+            <th>RequestDate</th>
+            <th>StartTime</th>
+            <th>EndTime</th>
+            <th>Status</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Department.Name</td>
+                <td>@item.User.FullName</td>
+                <td>@item.Lab.Name</td>
+                <td>@item.RequestDate.ToShortDateString()</td>
+                <td>@item.StartTime</td>
+                <td>@item.EndTime</td>
+                <td>@item.Status</td>
+                <td>
+                    @if (item.Status == "Pending")
+                    {
+                        <form asp-action="Approve" asp-route-id="@item.Id" method="post" style="display:inline">
+                            <button type="submit" class="btn btn-success btn-sm">Approve</button>
+                        </form>
+                        <form asp-action="Reject" asp-route-id="@item.Id" method="post" style="display:inline">
+                            <button type="submit" class="btn btn-danger btn-sm">Reject</button>
+                        </form>
+                    }
+                    else
+                    {
+                        <span class="badge bg-secondary">@item.Status</span>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

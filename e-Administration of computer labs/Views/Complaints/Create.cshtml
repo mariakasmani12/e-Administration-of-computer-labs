@@ -1,0 +1,39 @@
+﻿@model e_Administration_of_computer_labs.Models.Complaint
+
+@{
+    Layout = "~/Views/Shared/_DashboradLayout.cshtml";
+}
+
+<h2>Create Complaint</h2>
+
+<form asp-action="Create">
+    <div class="form-group">
+        <label asp-for="Description" class="control-label"></label>
+        <input asp-for="Description" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="DateSubmitted" class="control-label"></label>
+        <input asp-for="DateSubmitted" type="date" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Status" class="control-label"></label>
+        <select asp-for="Status" class="form-control">
+            <option>Pending</option>
+            <option>In Progress</option>
+            <option>Resolved</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label asp-for="UserId" class="control-label"></label>
+        <select asp-for="UserId" class="form-control" asp-items="ViewBag.UserId"></select>
+    </div>
+    <div class="form-group">
+        <label asp-for="LabId" class="control-label"></label>
+        <select asp-for="LabId" class="form-control" asp-items="ViewBag.LabId"></select>
+    </div>
+    <div class="form-group">
+        <label asp-for="EquipmentId" class="control-label"></label>
+        <select asp-for="EquipmentId" class="form-control" asp-items="ViewBag.EquipmentId"></select>
+    </div>
+    <button type="submit" class="btn btn-success">Submit</button>
+</form>

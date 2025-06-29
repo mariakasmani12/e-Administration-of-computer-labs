@@ -1,15 +1,15 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 
 namespace e_Administration_of_computer_labs.Models
 {
-    public class ApplicationDbContext :DbContext
+    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
-    : base(options)
+            : base(options)
         {
         }
 
-        public DbSet<User> Users { get; set; }
         public DbSet<Role> Roles { get; set; }
         public DbSet<Department> Departments { get; set; }
         public DbSet<Lab> Labs { get; set; }
@@ -22,40 +22,35 @@ namespace e_Administration_of_computer_labs.Models
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            base.OnModelCreating(modelBuilder);
+            base.OnModelCreating(modelBuilder); // required for Identity
 
+            // ExtraLabRequest — linked to HOD
             modelBuilder.Entity<ExtraLabRequest>()
-             .HasOne(r => r.HOD)
-             .WithMany()
-             .HasForeignKey(r => r.HODId)
-             .OnDelete(DeleteBehavior.Restrict);
+                .HasOne(r => r.User)
+                .WithMany()
+                .HasForeignKey(r => r.HODId)
+                .OnDelete(DeleteBehavior.Restrict);
 
-
+            // Complaint — linked to ApplicationUser (User), Lab, and Equipment
             modelBuilder.Entity<Complaint>()
                 .HasOne(c => c.User)
-                .WithMany(u => u.Complaints)
+                .WithMany()
                 .HasForeignKey(c => c.UserId)
                 .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<Complaint>()
                 .HasOne(c => c.Lab)
-                .WithMany(l => l.Complaints)
+                .WithMany()
                 .HasForeignKey(c => c.LabId)
                 .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<Complaint>()
                 .HasOne(c => c.Equipment)
-                .WithMany(e => e.Complaints)
+                .WithMany()
                 .HasForeignKey(c => c.EquipmentId)
                 .OnDelete(DeleteBehavior.Restrict);
+
+            
         }
-
-
-
-
-
-
-
-
     }
 }

@@ -6,8 +6,6 @@
         public string Name { get; set; }
         public string RoomNumber { get; set; }
 
-        public ICollection<Equipment> Equipments { get; set; }
-        public ICollection<Complaint> Complaints { get; set; }
-        public ICollection<LabAssignment> LabAssignments { get; set; }
+   
     }
 }

@@ -1,0 +1,43 @@
+﻿@model IEnumerable<e_Administration_of_computer_labs.Models.Complaint>
+
+@{
+    Layout = "~/Views/Shared/_DashboradLayout.cshtml";
+}
+
+<h2>Complaints</h2>
+
+<p>
+    <a asp-action="Create" class="btn btn-primary">Create New Complaint</a>
+</p>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Description</th>
+            <th>Date Submitted</th>
+            <th>Status</th>
+            <th>User</th>
+            <th>Lab</th>
+            <th>Equipment</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Description</td>
+                <td>@item.DateSubmitted.ToShortDateString()</td>
+                <td>@item.Status</td>
+                <td>@item.User?.Email</td>
+                <td>@item.Lab?.Name</td>
+                <td>@item.Equipment?.Name</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

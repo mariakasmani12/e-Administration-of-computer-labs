@@ -1,0 +1,55 @@
+﻿@using Microsoft.AspNetCore.Identity
+
+<!--**********************************
+			  Sidebar start
+		  ***********************************-->
+<div class="dlabnav">
+	<div class="dlabnav-scroll">
+		<ul class="metismenu" id="menu">
+			<li>
+				<a class="has-arrow " href="javascript:void(0);" aria-expanded="false">
+					<i class="material-symbols-outlined">home</i>
+					<span class="nav-text">User Management</span>
+
+				</a>
+				<ul aria-expanded="false">
+					<li><a asp-controller="Admin" asp-action="UserList">User Role & Department Assignment</a></li>
+					<li><a href="/Roles"> Roles </a></li>
+					<li><a href="/Departments"> Department</a></li>
+				</ul>
+
+			</li>
+			<li>
+				<a class="has-arrow " href="javascript:void(0);" aria-expanded="false">
+					<i class="material-symbols-outlined">school</i>
+					<span class="nav-text">Lab Mangement</span>
+				</a>
+				<ul aria-expanded="false">
+					<li><a href="/Labs">Labs</a></li>
+					<li><a href="/LabAssignmentS">Lab Assignemnts</a></li>
+					<li><a href="/ExtraLabRequests">Extra lab Request</a></li>
+
+
+				</ul>
+
+			</li>
+			<li>
+				<a class="has-arrow " href="javascript:void(0);" aria-expanded="false">
+					<i class="material-symbols-outlined">person</i>
+					<span class="nav-text">Equipment & Softwares</span>
+				</a>
+				<ul aria-expanded="false">
+					<li><a href="/Equipments">Equipments</a></li>
+					<li><a href="/Softwares">Softwares</a></li>
+
+				</ul>
+
+			</li>
+			
+			
+		</ul>
+		
+	</div>
+</div>
+<!--**********************************
+	Sidebar end
