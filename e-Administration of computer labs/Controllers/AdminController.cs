@@ -1,10 +1,12 @@
 ﻿using e_Administration_of_computer_labs.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace e_Administration_of_computer_labs.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class AdminController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -62,9 +64,23 @@ namespace e_Administration_of_computer_labs.Controllers
             if (user == null)
                 return NotFound();
 
+            // ❌ Optional: update your custom RoleId (if you're still using it)
             user.RoleId = model.SelectedRoleId;
             user.DepartmentId = model.SelectedDepartmentId;
 
+            // ✅ Remove from all existing Identity roles
+            var existingRoles = await _userManager.GetRolesAsync(user);
+            await _userManager.RemoveFromRolesAsync(user, existingRoles);
+
+            // ✅ Get role name from your Role table
+            var role = await _context.Roles.FirstOrDefaultAsync(r => r.Id == model.SelectedRoleId);
+            if (role != null)
+            {
+                // ✅ Assign new Identity role to user
+                await _userManager.AddToRoleAsync(user, role.Name);
+            }
+
+            // ✅ Update user data
             var result = await _userManager.UpdateAsync(user);
 
             if (result.Succeeded)
@@ -75,7 +91,7 @@ namespace e_Administration_of_computer_labs.Controllers
 
             foreach (var error in result.Errors)
             {
-                ModelState.AddModelError(string.Empty, error.Description);
+                ModelState.AddModelError("", error.Description);
             }
 
             model.Roles = await _context.Roles.ToListAsync();

@@ -58,11 +58,29 @@ namespace e_Administration_of_computer_labs.Controllers
             var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, false);
 
             if (result.Succeeded)
-                return RedirectToAction("Index", "Home");
+            {
+                var user = await _userManager.FindByEmailAsync(model.Email);
+                var roles = await _userManager.GetRolesAsync(user);
+
+                TempData["Role"] = string.Join(", ", roles);
+
+                if (roles.Contains("Admin"))
+                    return RedirectToAction("UserList", "Admin");
+                else if (roles.Contains("Instructor"))
+                    return RedirectToAction("Instructor", "Dashboard"); // Dashboard/Instructor.cshtml
+                else if (roles.Contains("HOD"))
+                    return RedirectToAction("HOD", "Dashboard");
+                else if (roles.Contains("TechnicalStaff"))
+                    return RedirectToAction("TechnicalStaff", "Dashboard");
+
+                // No valid role found
+                return RedirectToAction("AccessDenied", "Dashboard");
+            }
 
             ModelState.AddModelError("", "Invalid login attempt.");
             return View(model);
         }
+
 
         [HttpPost]
         public async Task<IActionResult> Logout()
