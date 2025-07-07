@@ -1,0 +1,51 @@
+﻿@model e_Administration_of_computer_labs.Models.InstructorDashboardViewModel
+@{
+    ViewBag.Title = "Instructor Dashboard";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Welcome, Instructor</h2>
+
+<hr />
+
+<h4>Assigned Labs</h4>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Lab Name</th>
+            <th>Timing</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var lab in Model.AssignedLabs)
+        {
+            <tr>
+                <td>@lab.Lab?.Name</td>
+                <td>@lab.DayOfWeek @lab.StartTime - @lab.EndTime</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+<hr />
+
+<h4>Recent Complaints</h4>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Subject</th>
+            <th>Status</th>
+            <th>Date</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var c in Model.RecentComplaints)
+        {
+            <tr>
+                <td>@c.Subject</td>
+                <td>@c.Status</td>
+            </tr>
+        }
+    </tbody>
+</table>

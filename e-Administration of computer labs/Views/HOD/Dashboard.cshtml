@@ -1,0 +1,86 @@
+﻿@model HODDashboardViewModel
+@{
+    ViewBag.Title = "HOD Dashboard";
+}
+
+<h2>Department Complaints</h2>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Subject</th>
+            <th>Description</th>
+            <th>Lab</th>
+            <th>Status</th>
+            <th>Submitted On</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var complaint in Model.DepartmentComplaints)
+        {
+            <tr>
+                <td>@complaint.Subject</td>
+                <td>@complaint.Description</td>
+                <td>@complaint.Lab?.Name</td>
+                <td>
+                    @if (complaint.Status == "Pending")
+                    {
+                        <span class="badge bg-warning text-dark">Pending</span>
+                    }
+                    else if (complaint.Status == "In Progress")
+                    {
+                        <span class="badge bg-info text-dark">In Progress</span>
+                    }
+                    else if (complaint.Status == "Resolved")
+                    {
+                        <span class="badge bg-success">Resolved</span>
+                    }
+                    else
+                    {
+                        <span class="badge bg-secondary">@complaint.Status</span>
+                    }
+                </td>
+                <td>@complaint.DateSubmitted.ToShortDateString()</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<h2>My Extra Lab Requests</h2>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Lab</th>
+            <th>Request Date</th>
+            <th>Start</th>
+            <th>End</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var req in Model.MyLabRequests)
+        {
+            <tr>
+                <td>@req.Lab?.Name</td>
+                <td>@req.RequestDate.ToShortDateString()</td>
+                <td>@req.StartTime</td>
+                <td>@req.EndTime</td>
+                <td>
+                    @if (req.Status == "Pending")
+                    {
+                        <span class="badge bg-warning text-dark">Pending</span>
+                    }
+                    else if (req.Status == "Approved")
+                    {
+                        <span class="badge bg-success">Approved</span>
+                    }
+                    else if (req.Status == "Rejected")
+                    {
+                        <span class="badge bg-danger">Rejected</span>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<a class="btn btn-primary mt-3" asp-action="RequestExtraLab">+ Request Extra Lab</a>

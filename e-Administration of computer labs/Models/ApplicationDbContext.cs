@@ -19,6 +19,8 @@ namespace e_Administration_of_computer_labs.Models
         public DbSet<LabAssignment> LabAssignments { get; set; }
         public DbSet<ExtraLabRequest> ExtraLabRequests { get; set; }
         public DbSet<Report> Reports { get; set; }
+        public DbSet<LabReport> LabReports { get; set; }
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

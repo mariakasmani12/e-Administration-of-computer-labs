@@ -1,0 +1,21 @@
+﻿@model e_Administration_of_computer_labs.Models.LabReport
+
+@{
+    ViewData["Title"] = "Submit Lab Report";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<form asp-action="SubmitLabReport" method="post">
+    <div class="form-group">
+        <label asp-for="LabId" class="control-label">Select Lab</label>
+        <select asp-for="LabId" class="form-control" asp-items="ViewBag.Labs"></select>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Content" class="control-label">Report Content</label>
+        <textarea asp-for="Content" class="form-control" rows="5"></textarea>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Submit Report</button>
+</form>

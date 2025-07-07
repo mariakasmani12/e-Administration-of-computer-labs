@@ -1,0 +1,51 @@
+﻿@model IEnumerable<e_Administration_of_computer_labs.Models.Complaint>
+
+@{
+    ViewData["Title"] = "My Complaints";
+}
+
+<h2 class="mb-4">My Submitted Complaints</h2>
+
+@if (!Model.Any())
+{
+    <div class="alert alert-info">You haven't submitted any complaints yet.</div>
+}
+else
+{
+    <table class="table table-bordered table-striped">
+        <thead class="table-dark">
+            <tr>
+                <th>Lab</th>
+                <th>Equipment</th>
+                <th>Description</th>
+                <th>Date Submitted</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Lab?.Name</td>
+                    <td>@item.Equipment?.Name</td>
+                    <td>@item.Description</td>
+                    <td>@item.DateSubmitted.ToString("yyyy-MM-dd")</td>
+                    <td>
+                        @if (item.Status == "Resolved")
+                        {
+                            <span class="badge bg-success">Resolved</span>
+                        }
+                        else if (item.Status == "In Progress")
+                        {
+                            <span class="badge bg-warning text-dark">In Progress</span>
+                        }
+                        else
+                        {
+                            <span class="badge bg-secondary">Pending</span>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

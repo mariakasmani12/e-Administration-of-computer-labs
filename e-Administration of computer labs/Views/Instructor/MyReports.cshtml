@@ -1,0 +1,26 @@
+﻿@model IEnumerable<e_Administration_of_computer_labs.Models.LabReport>
+@{
+    ViewData["Title"] = "My Lab Reports";
+}
+
+<h2>My Lab Reports</h2>
+
+<table class="table table-striped table-bordered">
+    <thead>
+        <tr>
+            <th>Lab Name</th>
+            <th>Submitted On</th>
+            <th>Report Content</th>
+        </tr>
+    </thead>
+    <tbody> 
+        @foreach (var report in Model)
+        {
+            <tr>
+                <td>@report.Lab?.Name</td>
+                <td>@report.SubmittedAt.ToString("dd MMM yyyy hh:mm tt")</td>
+                <td>@report.Content</td> @* ← Corrected this *@
+            </tr>
+        }
+    </tbody>
+</table>

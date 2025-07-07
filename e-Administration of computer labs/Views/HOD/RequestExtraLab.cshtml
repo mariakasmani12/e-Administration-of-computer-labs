@@ -1,0 +1,50 @@
+﻿@model e_Administration_of_computer_labs.Models.ExtraLabRequest
+
+@{
+    ViewBag.Title = "Request Extra Lab";
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml"; // Update as needed
+}
+
+<h2 class="mb-4">Request Extra Lab</h2>
+
+@if (TempData["Success"] != null)
+{
+    <div class="alert alert-success">@TempData["Success"]</div>
+}
+
+<form asp-action="RequestExtraLab" method="post">
+    <div class="form-group mb-3">
+        <label for="LabId">Select Lab</label>
+        <select asp-for="LabId" class="form-control" asp-items="@(new SelectList(ViewBag.Labs, "Id", "Name"))">
+            <option disabled selected>-- Select Lab --</option>
+        </select>
+        <span asp-validation-for="LabId" class="text-danger"></span>
+    </div>
+
+    <div class="form-group mb-3">
+        <label for="RequestDate">Request Date</label>
+        <input asp-for="RequestDate" type="date" class="form-control" />
+        <span asp-validation-for="RequestDate" class="text-danger"></span>
+    </div>
+
+    <div class="form-group mb-3">
+        <label for="StartTime">Start Time</label>
+        <input asp-for="StartTime" type="time" class="form-control" />
+        <span asp-validation-for="StartTime" class="text-danger"></span>
+    </div>
+
+    <div class="form-group mb-3">
+        <label for="EndTime">End Time</label>
+        <input asp-for="EndTime" type="time" class="form-control" />
+        <span asp-validation-for="EndTime" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-success mt-2">Submit Request</button>
+    <a asp-action="Dashboard" class="btn btn-secondary mt-2 ms-2">Cancel</a>
+</form>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

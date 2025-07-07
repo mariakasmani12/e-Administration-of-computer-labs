@@ -11,8 +11,8 @@
 
         public int LabId { get; set; }
         public Lab Lab { get; set; }
+        public DateTime RequestDate { get; set; } = DateTime.Today;
 
-        public DateTime RequestDate { get; set; }
         public TimeSpan StartTime { get; set; }
         public TimeSpan EndTime { get; set; }
         public string Status { get; set; }

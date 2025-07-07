@@ -1,0 +1,38 @@
+﻿@model e_Administration_of_computer_labs.Models.Complaint
+@{
+    ViewData["Title"] = "Register Complaint";
+}
+
+<h2 class="mb-4">Register a New Complaint</h2>
+
+<form asp-action="RegisterComplaint" method="post">
+    <div class="form-group mb-3">
+        <label asp-for="LabId" class="form-label">Select Lab</label>
+        <select asp-for="LabId" class="form-control" asp-items="ViewBag.Labs">
+            <option value="">-- Select Lab --</option>
+        </select>
+        <span asp-validation-for="LabId" class="text-danger"></span>
+    </div>
+
+    <div class="form-group mb-3">
+        <label asp-for="EquipmentId" class="form-label">Select Equipment</label>
+        <select asp-for="EquipmentId" class="form-control" asp-items="ViewBag.Equipments">
+            <option value="">-- Select Equipment --</option>
+        </select>
+        <span asp-validation-for="EquipmentId" class="text-danger"></span>
+    </div>
+
+    <div class="form-group mb-3">
+        <label asp-for="Description" class="form-label">Complaint Description</label>
+        <textarea asp-for="Description" class="form-control" rows="4"></textarea>
+        <span asp-validation-for="Description" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Submit Complaint</button>
+</form>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

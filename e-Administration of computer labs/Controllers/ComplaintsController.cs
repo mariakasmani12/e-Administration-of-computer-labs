@@ -1,22 +1,26 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
+using e_Administration_of_computer_labs.Models;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using e_Administration_of_computer_labs.Models;
 
 namespace e_Administration_of_computer_labs.Controllers
 {
     public class ComplaintsController : Controller
     {
         private readonly ApplicationDbContext _context;
-
-        public ComplaintsController(ApplicationDbContext context)
+        private readonly UserManager<ApplicationUser> _userManager;
+        public ComplaintsController(ApplicationDbContext context, UserManager<ApplicationUser> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
 
         // GET: Complaints
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Index()
         {
             var complaints = _context.Complaints
@@ -26,6 +30,7 @@ namespace e_Administration_of_computer_labs.Controllers
 
             return View(await complaints.ToListAsync());
         }
+
 
         // GET: Complaints/Details/5
         public async Task<IActionResult> Details(int? id)
@@ -146,5 +151,42 @@ namespace e_Administration_of_computer_labs.Controllers
         {
             return _context.Complaints.Any(e => e.Id == id);
         }
+        [Authorize(Roles = "Instructor")]
+        public IActionResult RegisterComplaint()
+        {
+            ViewBag.Labs = new SelectList(_context.Labs.ToList(), "Id", "Name");
+            ViewBag.Equipments = new SelectList(_context.Equipments.ToList(), "Id", "Name");
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Instructor")]
+        public async Task<IActionResult> RegisterComplaint(Complaint complaint)
+        {
+            complaint.UserId = _userManager.GetUserId(User);
+            complaint.DateSubmitted = DateTime.Now;
+            complaint.Status = "Pending";
+
+            _context.Complaints.Add(complaint);
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction("Dashboard", "Instructor");
+        }
+        [Authorize(Roles = "Instructor")]
+        public async Task<IActionResult> MyComplaints()
+        {
+            var userId = _userManager.GetUserId(User);
+            var complaints = await _context.Complaints
+                .Include(c => c.Lab)
+                .Include(c => c.Equipment)
+                .Where(c => c.UserId == userId)
+                .OrderByDescending(c => c.DateSubmitted)
+                .ToListAsync();
+
+            return View(complaints);
+        }
+
+
     }
 }
